@@ -12,6 +12,10 @@ import styled from "styled-components";
 
 const Chart = () => {
   const [chartList, setChartList] = useState([]);
+  const [isSelectCode, setIsSelectCode] = useState("1");
+
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+
   let itemName = "";
 
   useEffect(() => {
@@ -19,9 +23,9 @@ const Chart = () => {
     params.append("item", "망고");
 
     axios
-      .post("https://api.silkone.co.kr/api/request/dash_board_chart")
+      .post(`${BASE_URL}/api/request/dash_board_chart`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setChartList(res.data);
       })
       .catch((error) => console.log("error", error));
@@ -30,7 +34,11 @@ const Chart = () => {
   return (
     <WrapBox>
       <FirstSection>
-        <GeoMapChart chartList={chartList} />
+        <GeoMapChart
+          isSelectCode={isSelectCode}
+          setIsSelectCode={setIsSelectCode}
+          BASE_URL={BASE_URL}
+        />
       </FirstSection>
       <SecondSection>
         <TreeMapChart chartList={chartList} />
