@@ -12,7 +12,12 @@ import { ReactComponent as SouthAmerica } from "./images/South_America.svg";
 
 import styled from "styled-components";
 
-const GeoMapChart = ({ setIsSelectCode, isSelectCode, BASE_URL }) => {
+const GeoMapChart = ({
+  setIsSelectCode,
+  isSelectCode,
+  BASE_URL,
+  searchItem,
+}) => {
   const [mapData, setMapData] = useState([]);
 
   const handleClickCode = (code) => {
@@ -21,21 +26,31 @@ const GeoMapChart = ({ setIsSelectCode, isSelectCode, BASE_URL }) => {
 
   const addClickChartList = () => {
     const params = new URLSearchParams();
-    params.append("item", "망고");
+    params.append("item", searchItem);
     params.append("code", isSelectCode);
 
     axios
       .post(`${BASE_URL}/api/request/dash_board_chart_map`, params)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMapData(res.data);
       })
       .catch((error) => console.log("error", error));
   };
 
   useEffect(() => {
-    addClickChartList();
-  }, [isSelectCode]);
+    const params = new URLSearchParams();
+    params.append("item", searchItem);
+    params.append("code", isSelectCode);
+
+    axios
+      .post(`${BASE_URL}/api/request/dash_board_chart_map`, params)
+      .then((res) => {
+        // console.log(res.data);
+        setMapData(res.data);
+      })
+      .catch((error) => console.log("error", error));
+  }, [isSelectCode, searchItem]);
 
   return (
     <GeoMapWrapBox>

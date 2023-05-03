@@ -75,7 +75,7 @@ const TreeMapChart = ({ chartList }) => {
           (acc, cur) => acc + Number(cur.cnt),
           0
         ); // 총 cnt 더한 값
-        const FlagImage = treeData.map((data) => {
+        const FlagImage = treeData?.map((data) => {
           return `https://flagcdn.com/${data?.code2?.toLowerCase()}.svg`;
         }); // 국기 flag
 

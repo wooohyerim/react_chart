@@ -4,7 +4,7 @@ import ECharts from "echarts-for-react";
 
 import styled from "styled-components";
 
-const PieChart = ({ chartList, itemName }) => {
+const PieChart = ({ chartList }) => {
   const pieChartList = chartList?.chart_supply_rank;
 
   const [isClick, setIsClick] = useState(true);
